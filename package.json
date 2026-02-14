@@ -1,0 +1,51 @@
+{
+	"name": "typescript-template",
+	"version": "1.0.0",
+	"description": "TypeScript template for Node.js with ESM, Jest, XO, and Prettier.",
+	"keywords": [
+		"TypeScript",
+		"template",
+		"Node.js",
+		"ESM",
+		"Jest",
+		"XO",
+		"Prettier"
+	],
+	"homepage": "https://github.com/sebastian-suarez/TypeScript-template#readme",
+	"bugs": {
+		"url": "https://github.com/sebastian-suarez/TypeScript-template/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/sebastian-suarez/TypeScript-template.git"
+	},
+	"license": "MIT",
+	"author": "Sebastian Suarez <261091557+sebastian-suarez@users.noreply.github.com> (https://www.sebastiansuarez.dev)",
+	"type": "module",
+	"imports": {
+		"#src/*": "./src/*",
+		"#modules/*": "./src/modules/*"
+	},
+	"engines": {
+		"node": ">=18"
+	},
+	"scripts": {
+		"start": "tsx ./src/index.js",
+		"test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
+		"lint": "xo",
+		"format": "prettier --write .",
+		"prepare": "husky"
+	},
+	"devDependencies": {
+		"@tsconfig/node24": "^24.0.4",
+		"@types/jest": "^30.0.0",
+		"husky": "^9.1.7",
+		"jest": "^30.2.0",
+		"lint-staged": "^16.2.7",
+		"prettier": "3.8.1",
+		"ts-jest": "^29.4.6",
+		"tsx": "^4.21.0",
+		"typescript": "^5.9.3",
+		"xo": "^1.2.3"
+	}
+}
