@@ -1,4 +1,6 @@
-// Test file to check if the module resolution works correctly with the "imports" field in package.json
-import greet from "#modules/greet.js";
+import net from "node:net";
+import process from "#modules/state.js";
 
-console.log(greet("World"));
+const server = net.createServer(process);
+
+server.listen(2525);

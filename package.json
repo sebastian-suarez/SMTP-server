@@ -30,7 +30,7 @@
 		"node": ">=18"
 	},
 	"scripts": {
-		"start": "tsx ./src/index.js",
+		"start": "tsx ./src/index.ts",
 		"test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
 		"lint": "xo",
 		"format": "prettier --write .",
