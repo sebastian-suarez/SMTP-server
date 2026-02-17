@@ -1,23 +1,22 @@
 {
-	"name": "typescript-template",
+	"name": "smtp-server",
 	"version": "1.0.0",
-	"description": "TypeScript template for Node.js with ESM, Jest, XO, and Prettier.",
+	"description": "A basic SMTP server implementation in TypeScript for Node.js.",
 	"keywords": [
-		"TypeScript",
-		"template",
-		"Node.js",
-		"ESM",
-		"Jest",
-		"XO",
-		"Prettier"
+		"smtp",
+		"server",
+		"email",
+		"typescript",
+		"nodejs",
+		"tcp"
 	],
-	"homepage": "https://github.com/sebastian-suarez/TypeScript-template#readme",
+	"homepage": "https://github.com/sebastian-suarez/SMTP-server#readme",
 	"bugs": {
-		"url": "https://github.com/sebastian-suarez/TypeScript-template/issues"
+		"url": "https://github.com/sebastian-suarez/SMTP-server/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/sebastian-suarez/TypeScript-template.git"
+		"url": "git+https://github.com/sebastian-suarez/SMTP-server.git"
 	},
 	"license": "MIT",
 	"author": "Sebastian Suarez <261091557+sebastian-suarez@users.noreply.github.com> (https://www.sebastiansuarez.dev)",

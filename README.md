@@ -1,41 +1,53 @@
-# 🚀 TypeScript Template
+# SMTP Server
 
-A friendly TypeScript starter for Node.js ESM projects, with testing, linting, and formatting ready to go.
+A basic SMTP server implementation in TypeScript for Node.js.
 
-## ✨ What's Included
+## Current Behavior
 
-- ⚡ TypeScript + Node.js ESM setup
-- 🧪 Jest configured for TypeScript via `ts-jest`
-- 🧹 XO linting and Prettier formatting
-- 🧭 Import aliases via `package.json#imports`
+- Starts a TCP SMTP server on port `2525`
+- Sends `220` greeting on connection
+- Supports a basic command flow: `HELO`/`EHLO` -> `MAIL FROM` -> `RCPT TO` -> `DATA`
+- Returns simple SMTP responses (`250`, `354`, `221`)
 
-## 📋 Requirements
+## Requirements
 
 - Node.js 18+
 
-## 🛠️ Setup
+## Setup
 
 ```bash
 npm install
 ```
 
-## ▶️ Scripts
+## Run
 
-- `npm start` - Run the app with `tsx`
-- `npm test` - Run Jest tests
-- `npm run lint` - Lint code with XO
-- `npm run format` - Format files with Prettier
+```bash
+npm start
+```
 
-## 📁 Project Structure
+## Quick Manual Test
 
-- `src/index.ts` - Entry point example
-- `src/modules/greet.ts` - Sample module
-- `tests/index.test.ts` - Sample Jest test
-- `tsconfig.json` - TypeScript config extending `@tsconfig/node24`
+```bash
+nc localhost 2525
+HELO localhost
+MAIL FROM:<from@example.com>
+RCPT TO:<to@example.com>
+DATA
+```
 
-## 🧭 Path Aliases
+## Scripts
 
-- `#src/*` -> `src/*`
-- `#modules/*` -> `src/modules/*`
+- `npm start` - Run the server with `tsx`
+- `npm test` - Run Jest
+- `npm run lint` - Lint with XO
+- `npm run format` - Format with Prettier
 
-Use `.js` import specifiers in TypeScript source to match Node ESM resolution.
+## Project Structure
+
+- `src/index.ts` - Server bootstrap
+- `src/modules/state.ts` - SMTP connection state handler
+
+## Notes
+
+- This is a work in progress and not production-ready.
+- Import aliases are defined in `package.json#imports`.
