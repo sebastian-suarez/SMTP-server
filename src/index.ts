@@ -20,6 +20,12 @@ const server = net.createServer((socket) => {
 		const message = data.toString().trim();
 		const [command, ...args] = message.split(" ");
 
+		if (state !== States.DATA && command.toUpperCase() === "QUIT") {
+			socket.write("221 Bye\r\n");
+			socket.end();
+			return;
+		}
+
 		switch (state) {
 			case States.CONNECTED: {
 				if (!["HELO", "EHLO"].includes(command.toUpperCase())) {
