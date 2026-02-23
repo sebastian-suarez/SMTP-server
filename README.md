@@ -1,34 +1,37 @@
-# SMTP Server
+# 📬 SMTP Server
 
-Minimal stateful SMTP server prototype built with TypeScript and Node.js.
+A small, stateful SMTP server prototype built with **TypeScript + Node.js**.
+Great for learning how SMTP command flow works in practice.
 
-## Features
+## ✨ Features
 
 - Starts a TCP SMTP server on port `2525`
 - Sends a `220` greeting when a client connects
-- Implements a simple command flow:
+- Follows a simple SMTP flow:
   - `HELO`/`EHLO` -> `MAIL FROM` -> `RCPT TO` (one or more) -> `DATA`
-- Accepts email body lines until a single `.` line is received
+- Accepts message body lines until a single `.` line is received
 - Supports `QUIT` outside DATA mode
-- Returns SMTP-style responses (`250`, `221`, `503`)
+- Returns SMTP-style responses like `250`, `221`, and `503`
 
-## Requirements
+## ✅ Requirements
 
 - Node.js 18+
 
-## Setup
+## 🚀 Setup
 
 ```bash
 npm install
 ```
 
-## Run
+## ▶️ Run the Server
 
 ```bash
 npm start
 ```
 
-## Quick Manual Test
+## 🧪 Quick Manual Test
+
+Use `nc` (netcat) to talk directly to the server:
 
 ```bash
 nc localhost 2525
@@ -41,20 +44,20 @@ Hello from local SMTP test
 QUIT
 ```
 
-## Scripts
+## 🛠️ Scripts
 
 - `npm start` - Run the server with `tsx`
-- `npm test` - Run Jest
+- `npm test` - Run Jest tests
 - `npm run lint` - Lint with XO
 - `npm run format` - Format with Prettier
 
-## Project Structure
+## 📁 Project Structure
 
 - `src/index.ts` - Server bootstrap
-- `tests/index.test.ts` - Jest tests for SMTP command/state flow
+- `tests/index.test.ts` - Tests for SMTP command/state flow
 
-## Notes
+## 📝 Notes
 
-- This is a learning-focused project and not production-ready.
-- No TLS, authentication, message queueing, or mailbox delivery is implemented.
+- This project is learning-focused and not production-ready.
+- TLS, authentication, queueing, and mailbox delivery are not implemented.
 - Import aliases are defined in `package.json#imports`.
