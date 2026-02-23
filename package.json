@@ -1,14 +1,16 @@
 {
 	"name": "smtp-server",
 	"version": "1.0.0",
-	"description": "A basic SMTP server implementation in TypeScript for Node.js.",
+	"description": "Minimal stateful SMTP server prototype built with TypeScript and Node.js.",
 	"keywords": [
 		"smtp",
-		"server",
+		"smtp-server",
 		"email",
+		"email-protocol",
 		"typescript",
 		"nodejs",
-		"tcp"
+		"tcp",
+		"networking"
 	],
 	"homepage": "https://github.com/sebastian-suarez/SMTP-server#readme",
 	"bugs": {

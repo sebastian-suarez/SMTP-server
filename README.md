@@ -1,13 +1,16 @@
 # SMTP Server
 
-A basic SMTP server implementation in TypeScript for Node.js.
+Minimal stateful SMTP server prototype built with TypeScript and Node.js.
 
-## Current Behavior
+## Features
 
 - Starts a TCP SMTP server on port `2525`
-- Sends `220` greeting on connection
-- Supports a basic command flow: `HELO`/`EHLO` -> `MAIL FROM` -> `RCPT TO` -> `DATA`
-- Returns simple SMTP responses (`250`, `354`, `221`)
+- Sends a `220` greeting when a client connects
+- Implements a simple command flow:
+  - `HELO`/`EHLO` -> `MAIL FROM` -> `RCPT TO` (one or more) -> `DATA`
+- Accepts email body lines until a single `.` line is received
+- Supports `QUIT` outside DATA mode
+- Returns SMTP-style responses (`250`, `221`, `503`)
 
 ## Requirements
 
@@ -33,6 +36,9 @@ HELO localhost
 MAIL FROM:<from@example.com>
 RCPT TO:<to@example.com>
 DATA
+Hello from local SMTP test
+.
+QUIT
 ```
 
 ## Scripts
@@ -45,9 +51,10 @@ DATA
 ## Project Structure
 
 - `src/index.ts` - Server bootstrap
-- `src/modules/state.ts` - SMTP connection state handler
+- `tests/index.test.ts` - Jest tests for SMTP command/state flow
 
 ## Notes
 
-- This is a work in progress and not production-ready.
+- This is a learning-focused project and not production-ready.
+- No TLS, authentication, message queueing, or mailbox delivery is implemented.
 - Import aliases are defined in `package.json#imports`.
