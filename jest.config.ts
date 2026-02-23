@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { createDefaultEsmPreset } from "ts-jest";
+import { type Config } from "jest";
 
 const tsJestEsmPreset = createDefaultEsmPreset();
 
-/** @type {import("jest").Config} **/
-const config = {
+const config: Config = {
 	testEnvironment: "node",
 	...tsJestEsmPreset,
 	moduleNameMapper: {
