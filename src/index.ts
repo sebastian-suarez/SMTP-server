@@ -1,6 +1,6 @@
 import net from "node:net";
 
-enum States {
+enum State {
 	CONNECTED,
 	GREETED,
 	RCPT_READY,
@@ -8,7 +8,8 @@ enum States {
 }
 
 const server = net.createServer((socket) => {
-	let state = States.CONNECTED;
+	let state = State.CONNECTED;
+	let buffer = "";
 	let hostname: string;
 	let from: string;
 	const to: string[] = [];
@@ -16,30 +17,31 @@ const server = net.createServer((socket) => {
 
 	socket.write("220 Welcome to the SMTP server\r\n");
 
-	socket.on("data", (data) => {
-		const message = data.toString().trim();
+	socket.on("data", (chunk) => {
+		buffer += chunk.toString();
+		const message = chunk.toString().trim();
 		const [command, ...args] = message.split(" ");
 
-		if (state !== States.DATA && command.toUpperCase() === "QUIT") {
+		if (state !== State.DATA && command.toUpperCase() === "QUIT") {
 			socket.write("221 Bye\r\n");
 			socket.end();
 			return;
 		}
 
 		switch (state) {
-			case States.CONNECTED: {
+			case State.CONNECTED: {
 				if (!["HELO", "EHLO"].includes(command.toUpperCase())) {
 					socket.write("503 Bad sequence of commands\r\n");
 					return;
 				}
 
-				state = States.GREETED;
+				state = State.GREETED;
 				hostname = args[0];
 				socket.write(`250 Hello ${hostname}\r\n`);
 				break;
 			}
 
-			case States.GREETED: {
+			case State.GREETED: {
 				const [command_, email] = message.split(":");
 				if (command_.toUpperCase() !== "MAIL FROM") {
 					socket.write("503 Bad sequence of commands\r\n");
@@ -47,12 +49,12 @@ const server = net.createServer((socket) => {
 				}
 
 				from = email;
-				state = States.RCPT_READY;
+				state = State.RCPT_READY;
 				socket.write(`250 OK\r\n`);
 				break;
 			}
 
-			case States.RCPT_READY: {
+			case State.RCPT_READY: {
 				const [command_, email] = message.split(":");
 				if (command_ !== "RCPT TO" && command !== "DATA") {
 					socket.write("503 Bad sequence of commands\r\n");
@@ -60,7 +62,7 @@ const server = net.createServer((socket) => {
 				}
 
 				if (command === "DATA") {
-					state = States.DATA;
+					state = State.DATA;
 					socket.write(`250 OK\r\n`);
 					return;
 				}
@@ -70,12 +72,12 @@ const server = net.createServer((socket) => {
 				break;
 			}
 
-			case States.DATA: {
+			case State.DATA: {
 				if (message === ".") {
 					console.log(
 						`${hostname} sends from ${from} to ${to.join(",")} ${body.join("\r\n ")}`,
 					);
-					state = States.GREETED;
+					state = State.GREETED;
 					from = "";
 					body = [];
 					socket.write("250 OK");
